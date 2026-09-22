@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hybrid Gaussians | Robust Open-Vocabulary 3D Segmentation</title>
+  <meta name="description" content="Hybrid Gaussians for Robust Open-Vocabulary 3D Segmentation with Multi-View Object Association and Boundary Refinement. Research paper, results, and eight multi-view video demonstrations.">
+  <meta name="theme-color" content="#ffffff">
+  <meta property="og:title" content="Hybrid Gaussians for Robust Open-Vocabulary 3D Segmentation">
+  <meta property="og:description" content="Unifying object identity and language-aligned semantics for consistent 3D segmentation and sharper boundaries.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://nora202.github.io/hybridgaussians/">
+  <link rel="stylesheet" href="styles.css"><script src="script.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><a class="wordmark" href="#">Hybrid<span>Gaussians</span><span class="mark" aria-hidden="true">●</span></a><nav aria-label="Main navigation"><a href="#demos">Demos</a><a href="#method">Method</a><a href="#results">Results</a><a href="assets/papers/hybrid-gaussians.pdf">Paper <span aria-hidden="true">↗</span></a></nav></header>
+<main id="main">
+<section class="hero wrap">
+  <p class="eyebrow">OPEN-VOCABULARY 3D SEGMENTATION</p>
+  <h1><span>Hybrid Gaussians</span><br>for Robust Open-Vocabulary<br class="desktop-break"> 3D Segmentation</h1>
+  <p class="subtitle">with Multi-View Object Association<br class="mobile-break"> and Boundary Refinement</p>
+  <div class="resources"><a class="button primary" href="assets/papers/hybrid-gaussians.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M14 3H5v18h14V8zM14 3v5h5M8 13h8M8 17h6"/></svg>Paper</a><a class="button" href="assets/papers/Appendix_341.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6 3h12v18H6zM9 8h6M9 12h6M9 16h4"/></svg>Supplementary</a><a class="button" href="#demos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m9 5 11 7-11 7z"/></svg>Video demos</a></div>
+  <p class="hero-summary">Object identity meets language-aligned semantics.<br>Consistent across views. Precise at the boundaries.</p>
+</section>
+<section id="demos" class="wrap demo-section" aria-labelledby="demo-heading">
+  <div class="section-top"><div><p class="eyebrow">SEE IT IN 3D</p><h2 id="demo-heading">A text query. An object. Every view.</h2></div><span class="section-note">4 scenes · 8 queries</span></div>
+  <p class="intro">Explore multi-view segmentation results. Each clip shows the original scene, the predicted object, and its depth.</p>
+  <div class="demo-panel">
+    <div class="demo-controls"><div class="scene-options" role="group" aria-label="Choose a scene"><button class="scene active" data-scene="figurines" aria-pressed="true">Figurines</button><button class="scene" data-scene="ramen" aria-pressed="false">Ramen</button><button class="scene" data-scene="bed" aria-pressed="false">Bed</button><button class="scene" data-scene="sofa" aria-pressed="false">Sofa</button></div><div class="query-control"><label for="query">Text query</label><select id="query"><option value="Pikachu">Pikachu</option><option value="jake">jake</option></select></div></div>
+    <div class="video-stage"><video id="demo-video" controls muted loop playsinline preload="metadata" poster="assets/images/figurines-Pikachu.jpg" aria-label="Figurines scene, Pikachu query: original scene, prediction, and depth"><source src="assets/videos/scene_figurines_prompt_Pikachu.mp4" type="video/mp4">Your browser does not support video. <a href="assets/videos/scene_figurines_prompt_Pikachu.mp4">Download the demo.</a></video></div>
+    <div class="demo-caption"><span id="demo-caption" aria-live="polite">Figurines · “Pikachu”</span><a id="video-download" href="assets/videos/scene_figurines_prompt_Pikachu.mp4" download>Download clip <span aria-hidden="true">↓</span></a></div>
+    <p id="video-status" role="status" hidden></p>
+  </div>
+  <noscript><p>All videos: <a href="assets/videos/scene_figurines_prompt_jake.mp4">jake</a> · <a href="assets/videos/scene_figurines_prompt_Pikachu.mp4">Pikachu</a> · <a href="assets/videos/scene_ramen_prompt_eggs.mp4">eggs</a> · <a href="assets/videos/scene_ramen_prompt_pork_belly.mp4">pork belly</a> · <a href="assets/videos/scene_bed_prompt_camera.mp4">camera</a> · <a href="assets/videos/scene_bed_prompt_shoe.mp4">shoe</a> · <a href="assets/videos/scene_sofa_prompt_Gundam.mp4">Gundam</a> · <a href="assets/videos/scene_sofa_prompt_UNO_cards.mp4">UNO cards</a>.</p></noscript>
+  <div class="metrics"><div><strong>59.1<span>%</span></strong><p>LERF · average mIoU</p></div><div><strong>96.1<span>%</span></strong><p>3D-OVS · average mIoU</p></div><div><strong>+13.43<span>%</span></strong><p>Relative gain over Seg-Splat on LERF</p></div></div>
+</section>
+<section id="abstract" class="abstract-band"><div class="reading"><p class="eyebrow">ABSTRACT</p><h2>More reliable objects.<br>More precise segmentation.</h2><p>Open-vocabulary 3D segmentation aims to localize objects in 3D scenes from free-form text queries, providing a flexible interface for language-guided scene understanding. Recent progress in vision-language models and neural scene representations has advanced this area by lifting 2D cues into 3D and enriching NeRF- or 3DGS-based scene representations with semantic or identity information. However, robust object-level segmentation remains challenging in real image sequences, where incomplete or noisy 2D supervision can destabilize multi-view identity assignment, while full-scene semantic learning can weaken object-level discriminability.</p><p>To address these issues, we introduce <strong>Hybrid Gaussians</strong>, a unified 3D representation that jointly models object association and language-aligned semantics, along with a <strong>Multi-View Object Association</strong> mechanism that combines Observation Fusion and Semantic Contrastive Learning. We further introduce <strong>Boundary Reconstruction Optimization</strong> to explicitly improve contour quality by refining local boundary structure. Experiments on LERF and 3D-OVS demonstrate strong quantitative and qualitative performance. In particular, our method achieves 59.1% mIoU on LERF, yielding a 13.43% relative gain over the baseline. These results show that jointly optimizing object association and boundary-aware refinement substantially improves open-vocabulary 3D segmentation.</p></div></section>
+<section id="method" class="wrap content-section"><p class="eyebrow">THE METHOD</p><h2>A unified representation. Three complementary components.</h2><p class="intro">Each Gaussian carries both an object identity and a learnable language-aligned semantic embedding, enabling object-conditioned rendering and learning.</p>
+  <figure class="paper-figure"><a href="assets/images/overview.png" target="_blank" rel="noopener" aria-label="Open the representation overview at full resolution"><img src="assets/images/overview.png" alt="Traditional Gaussian attributes compared with the hybrid identity and semantic representation, with examples of occlusion, motion blur, and intermittent visibility." width="1537" height="580" loading="lazy"></a><figcaption><strong>Hybrid Gaussians.</strong> Object identity and semantics share the same 3D primitives, supporting consistent segmentation under occlusion, motion blur, and incomplete observations.</figcaption></figure>
+  <figure class="paper-figure pipeline"><a href="assets/images/pipeline.png" target="_blank" rel="noopener" aria-label="Open the training pipeline at full resolution"><img src="assets/images/pipeline.png" alt="Training pipeline linking input images and hybrid Gaussians to observation fusion, semantic contrastive learning, and boundary reconstruction optimization." width="1537" height="740" loading="lazy"></a><figcaption><strong>Training pipeline.</strong> Multi-view evidence stabilizes object association; object-specific semantic learning separates objects; boundary reconstruction refines local details.</figcaption></figure>
+  <div class="method-grid"><article><span class="step">01</span><h3>Observation Fusion</h3><p>Fuse object-mask support across views to update Gaussian identity assignments and build more reliable object support.</p></article><article><span class="step">02</span><h3>Semantic Contrastive Learning</h3><p>Render object-conditioned semantic features and align them across views to improve language-level discrimination.</p></article><article><span class="step">03</span><h3>Boundary Reconstruction</h3><p>Align image gradients near object contours to refine local structure and recover sharper segmentation boundaries.</p></article></div>
+</section>
+<section id="results" class="results-band"><div class="wrap content-section"><p class="eyebrow">EXPERIMENTS</p><h2>Quantitative results</h2><p class="intro">Open-vocabulary segmentation on LERF and 3D-OVS. All values are mIoU (%); higher is better. Results are reproduced from Table 1 of the paper.</p>
+<div class="table-tabs" role="group" aria-label="Choose benchmark"><button class="benchmark active" data-benchmark="lerf" aria-pressed="true">LERF</button><button class="benchmark" data-benchmark="ovs" aria-pressed="false">3D-OVS</button></div>
+<div id="lerf-table" class="table-scroll" role="region" aria-label="LERF results" tabindex="0"><table><caption>LERF · fine-grained indoor scenes</caption><thead><tr><th scope="col">Method</th><th scope="col">Figurines</th><th scope="col">Teatime</th><th scope="col">Ramen</th><th scope="col">Kitchen</th><th scope="col">Average ↑</th></tr></thead><tbody>
+<tr><th scope="row">LERF</th><td>38.6</td><td>45.0</td><td>28.2</td><td>37.9</td><td>37.4</td></tr>
+<tr><th scope="row">LEGaussians</th><td>40.8</td><td>60.3</td><td>46.0</td><td>39.4</td><td>46.6</td></tr>
+<tr><th scope="row">G-Grouping</th><td>28.8</td><td>46.8</td><td>31.1</td><td>11.6</td><td>29.6</td></tr>
+<tr><th scope="row">3D-OVS</th><td>44.8</td><td>56.1</td><td>28.7</td><td>39.3</td><td>42.2</td></tr>
+<tr><th scope="row">OpenGaussian</th><td>39.3</td><td>60.4</td><td>31.1</td><td>22.7</td><td>38.4</td></tr>
+<tr><th scope="row">LangSplat</th><td>44.7</td><td>65.1</td><td>51.2</td><td>44.5</td><td>51.4</td></tr>
+<tr><th scope="row">Feature-3DGS</th><td>58.8</td><td>40.5</td><td>43.7</td><td>—</td><td>—</td></tr>
+<tr><th scope="row">Seg-Splat</th><td>49.8</td><td>63.5</td><td>54.4</td><td>40.7</td><td>52.1</td></tr>
+<tr><th scope="row">COS3D</th><td><strong>60.0</strong></td><td>65.1</td><td>35.9</td><td>42.1</td><td>50.8</td></tr>
+<tr class="ours"><th scope="row">Hybrid Gaussians <span>Ours</span></th><td>58.6</td><td><strong>66.5</strong></td><td><strong>57.6</strong></td><td><strong>53.7</strong></td><td><strong>59.1</strong></td></tr>
+</tbody></table></div>
+<div id="ovs-table" class="table-scroll" role="region" aria-label="3D-OVS results" tabindex="0"><table><caption>3D-OVS · language-driven scene segmentation</caption><thead><tr><th scope="col">Method</th><th scope="col">Bed</th><th scope="col">Bench</th><th scope="col">Room</th><th scope="col">Sofa</th><th scope="col">Lawn</th><th scope="col">Average ↑</th></tr></thead><tbody>
+<tr><th scope="row">LERF</th><td>73.5</td><td>53.2</td><td>46.6</td><td>27.0</td><td>73.7</td><td>54.8</td></tr>
+<tr><th scope="row">ODISE</th><td>52.6</td><td>24.1</td><td>52.5</td><td>48.3</td><td>39.8</td><td>43.5</td></tr>
+<tr><th scope="row">OV-Seg</th><td>79.8</td><td>88.9</td><td>71.4</td><td>66.1</td><td>81.2</td><td>77.5</td></tr>
+<tr><th scope="row">LEGaussians</th><td>52.8</td><td>61.3</td><td>51.8</td><td>42.0</td><td>59.6</td><td>53.5</td></tr>
+<tr><th scope="row">G-Grouping</th><td>64.5</td><td><strong>95.6</strong></td><td>96.4</td><td>91.3</td><td><strong>97.0</strong></td><td>89.0</td></tr>
+<tr><th scope="row">3D-OVS</th><td>89.5</td><td>89.3</td><td>92.8</td><td>74.0</td><td>88.2</td><td>86.8</td></tr>
+<tr><th scope="row">LangSplat</th><td>92.5</td><td>94.2</td><td>94.1</td><td>90.0</td><td>96.1</td><td>93.4</td></tr>
+<tr><th scope="row">Feature-3DGS</th><td>83.5</td><td>90.7</td><td>84.7</td><td>86.9</td><td>93.4</td><td>87.8</td></tr>
+<tr><th scope="row">Laser</th><td>91.4</td><td>88.3</td><td>92.8</td><td>86.0</td><td>88.2</td><td>89.3</td></tr>
+<tr><th scope="row">SAGA</th><td><strong>97.4</strong></td><td>95.4</td><td>96.8</td><td>93.5</td><td>96.6</td><td>96.0</td></tr>
+<tr><th scope="row">Seg-Splat</th><td>95.8</td><td>95.1</td><td>78.4</td><td>94.1</td><td>93.0</td><td>91.3</td></tr>
+<tr class="ours"><th scope="row">Hybrid Gaussians <span>Ours</span></th><td>96.4</td><td>94.9</td><td><strong>98.0</strong></td><td><strong>94.5</strong></td><td>96.8</td><td><strong>96.1</strong></td></tr>
+</tbody></table></div><p class="table-note">Bold indicates the best score in each column. — indicates an unreported result. Methods with no reported scores for a dataset are omitted.</p>
+</div></section>
+<section class="wrap content-section"><p class="eyebrow">A CLOSER LOOK</p><h2>Object consistency, down to the boundary.</h2><figure class="paper-figure"><a href="assets/images/comparisons.png" target="_blank" rel="noopener" aria-label="Open qualitative comparisons at full resolution"><img src="assets/images/comparisons.png" alt="Multi-view segmentation comparisons on teatime, ramen, and waldo kitchen for LangSplat, Gaussian Grouping, OpenGaussian, Seg-Splat, and our method." width="1537" height="670" loading="lazy"></a><figcaption><strong>Qualitative comparison.</strong> Language queries select objects across views in the teatime, ramen, and waldo kitchen scenes. See the full-resolution figure for detailed comparisons.</figcaption></figure>
+<div class="boundary-feature"><div><h3>Refining the contour</h3><p>Boundary Reconstruction Optimization improves average boundary IoU from <strong>56.52% to 58.53%</strong> on LERF and from <strong>80.18% to 81.25%</strong> on 3D-OVS.</p><p class="small">Reported in supplementary Table 2 and main-paper Table 3.</p></div><figure><a href="assets/images/boundary.png" target="_blank" rel="noopener" aria-label="Open boundary refinement comparison"><img src="assets/images/boundary.png" alt="Rabbit object contour comparison without and with boundary reconstruction optimization." loading="lazy" width="1537" height="252"></a><figcaption>Boundary refinement on a queried object.</figcaption></figure></div>
+</section>
+<section class="reading limitations"><h2>Limitations</h2><p>The method depends on SAM/SAM2 object proposals: objects entirely missed during 2D preprocessing cannot be reliably recovered. Extremely thin structures and complex topology remain challenging. Object-conditioned optimization also adds computational cost compared with simpler 3DGS pipelines. Further analysis is provided in the supplementary material.</p></section>
+</main>
+<footer><div class="wrap footer-inner"><a class="wordmark" href="#">Hybrid<span>Gaussians</span></a><p>Robust open-vocabulary 3D segmentation.</p><a href="https://gujiaqivadin.github.io/hybridgs/" target="_blank" rel="noopener">Page structure inspired by HybridGS <span aria-hidden="true">↗</span></a></div></footer>
+</body></html>

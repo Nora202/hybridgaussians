@@ -18,7 +18,7 @@ No build or package installation is needed. All site assets use relative URLs fo
 - `assets/videos/`: eight supplied H.264 videos, unchanged.
 - `assets/images/`: figures from the supplied paper, the updated pipeline PDF rendered for the web, and video-frame posters.
 
-The supplied manuscript is anonymous. Author names, affiliations, acceptance status, code links, and a formal BibTeX citation have intentionally not been invented. Add these when verified publication metadata is available.
+The Paper links use the updated five-page manuscript supplied as `view.pdf`. The separate `more-segmentation-results.html` page shows appendix figures 1–4 in a two-column, two-row grid, each linked to its original PDF.
 
 Benchmark numbers come from main-paper Table 1. Boundary ablations come from main-paper Table 3 and appendix Table 2. The +13.43% LERF result is a relative gain over Seg-Splat (52.1 → 59.1 mIoU), equivalent to +7.0 percentage points.
 

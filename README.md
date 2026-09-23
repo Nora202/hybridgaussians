@@ -11,12 +11,12 @@ No build or package installation is needed. All site assets use relative URLs fo
 
 ## Content
 
-- `index.html`: manuscript summary, methods, complete reported benchmark rows, qualitative figures, limitations.
+- `index.html`: manuscript summary, methods, complete reported benchmark rows, qualitative figures.
 - `styles.css`: responsive layout.
 - `script.js`: four-scene/eight-query video selection and benchmark switching.
-- `assets/papers/`: supplied manuscript and appendix, unchanged.
+- `assets/papers/`: supplied manuscript, appendix, and updated pipeline PDF, unchanged.
 - `assets/videos/`: eight supplied H.264 videos, unchanged.
-- `assets/images/`: figures cropped from the supplied paper and video-frame posters.
+- `assets/images/`: figures from the supplied paper, the updated pipeline PDF rendered for the web, and video-frame posters.
 
 The supplied manuscript is anonymous. Author names, affiliations, acceptance status, code links, and a formal BibTeX citation have intentionally not been invented. Add these when verified publication metadata is available.
 
